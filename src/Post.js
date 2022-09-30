@@ -1,5 +1,5 @@
 import { Avatar } from "@mui/material";
-import React, { forwardRef } from "react";
+import React, { forwardRef ,useEffect,useState} from "react";
 import "./Post.css";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -9,12 +9,21 @@ import PublishIcon from "@mui/icons-material/Publish";
 
 const Post = forwardRef(
   ({ displayName,
-     username, 
-     verified, 
-     text, 
-     image, 
-     avatar },ref) => {
-    return (
+    username, 
+    verified, 
+    text, 
+    image, 
+    avatar },ref) => {
+    const [count, setcount] = useState(0);
+      const handleLike=()=>{
+        if(count>=1){
+          count=count;
+        }
+        setcount(count+1)
+      }
+    
+      
+      return (
       <div className="post" ref={ref}>
         <div className="post_avatar">
           <Avatar src={avatar}></Avatar>
@@ -38,7 +47,7 @@ const Post = forwardRef(
           <div className="post_footer">
             <ChatBubbleOutlineIcon fontSize="small" />
             <RepeatIcon fontSize="small" />
-            <FavoriteBorderIcon fontSize="small" />
+            <FavoriteBorderIcon className="like" onClick={handleLike} fontSize="small" />{count}Like
             <PublishIcon fontSize="small" />
           </div>
         </div>
